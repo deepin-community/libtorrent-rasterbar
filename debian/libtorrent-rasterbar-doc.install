@@ -1,0 +1,3 @@
+docs/*.html		usr/share/doc/libtorrent-rasterbar-doc/html/
+docs/style.css		usr/share/doc/libtorrent-rasterbar-doc/html/
+docs/img/*		usr/share/doc/libtorrent-rasterbar-doc/html/img/

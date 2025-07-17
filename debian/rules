@@ -1,4 +1,37 @@
 #!/usr/bin/make -f
 
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+
+ifneq (,$(filter $(DEB_HOST_ARCH), armel mipsel m68k powerpc riscv64 sh4))
+  export DEB_LDFLAGS_MAINT_APPEND += -Wl,--no-as-needed -latomic -Wl,--as-needed
+endif
+
+# git clone https://github.com/arvidn/try_signal.git deps/try_signal
+# git clone https://github.com/arvidn/libsimulator.git simulation/libsimulator
+
 %:
-	dh $@
+	dh $@ -Scmake+ninja
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+	-Dpython-bindings=ON \
+	-Dpython-egg-info=ON
+
+#	exit 1
+
+override_dh_auto_build-arch:
+	dh_auto_build -- \
+	-d explain -d keepdepfile -d keeprsp
+
+override_dh_auto_build-indep:
+	make -C docs
+
+override_dh_clean-indep:
+	make clean -C docs
+
+	dh_clean docs/single-page-ref.rst docs/single-page-ref.html
+
+override_dh_auto_install-indep:
+override_dh_auto_test:
+override_dh_dwz:
