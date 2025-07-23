@@ -10,8 +10,7 @@ Build-Depends: dpkg-dev (>= 1.22.5), debhelper-compat (= 13), python3-dev,
  dh-sequence-python3, libboost-system-dev (>= 1.81), libboost-python-dev,
  libssl-dev, pkgconf, cmake, ninja-build, python3-setuptools,
 
-Package: libtorrent-rasterbar2.0t64
-Provides: ${t64:Provides}
+Package: libtorrent-rasterbar2.0
 Replaces: libtorrent-rasterbar2.0
 Breaks: libtorrent-rasterbar2.0 (<< ${source:Version})
 Architecture: any
@@ -33,7 +32,7 @@ Package: libtorrent-rasterbar-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libtorrent-rasterbar2.0t64 (= ${binary:Version}), libboost-system-dev,
+Depends: ${misc:Depends}, libtorrent-rasterbar2.0 (= ${binary:Version}), libboost-system-dev,
  libssl-dev, pkgconf
 Suggests: libtorrent-rasterbar-doc
 Description: Development files for libtorrent-rasterbar
